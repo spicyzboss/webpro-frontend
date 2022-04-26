@@ -1,6 +1,17 @@
 <template>
-  <div class="h-screen mx-auto bg-white max-w-7xl">
-    <HelloWorld />
+  <div>
+    <div class="h-max bg-white">
+      <NavLanding />
+    </div>
+    <div class="h-[60vh] mx-auto bg-white flex justify-center items-center">
+      <HelloWorld />
+    </div>
+    <div class="h-[60vh] mx-auto bg-gray-100 flex justify-center items-center">
+      <HelloWorld />
+    </div>
+    <div class="h-[60vh] mx-auto bg-white flex justify-center items-center">
+      <HelloWorld />
+    </div>
   </div>
 </template>
 
