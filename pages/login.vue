@@ -1,15 +1,13 @@
 <template>
   <div class="h-screen">
-    <div class="h-max">
-      <NavLanding />
-    </div>
-    <div class="flex justify-center h-full mx-auto">
-      <div class="relative w-[30vw] h-[50vh] mt-[5%] mr-5">
-        <p class="text-4xl font-bold text-left text-[#f3799e]">
+    <NavLanding />
+    <div class="flex justify-center mx-8 mt-16">
+      <div class="hidden mr-16 lg:max-w-lg lg:block">
+        <p class="text-4xl font-bold text-[#f3799e]">
           <span class="text-6xl text-[#6667ba]">Sometime</span>  we don't want romantic relationship, we just want friend.<br><br><span class="text-6xl text-[#b66db0]">But</span><span class="text-[#ffc568]"> sometimes it can't be forced.</span>
         </p>
       </div>
-      <div class="2xl:w-[15vw] xl:w-[25vw] mt-[5%] ml-5">
+      <div>
         <FormLogin />
       </div>
     </div>
