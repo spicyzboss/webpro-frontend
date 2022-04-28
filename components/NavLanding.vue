@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <nav class="bg-[#6667ba] h-16">
-      <div class="relative h-full w-[50%] mx-[25%] py-1 flex justify-between">
-        <div class="h-full w-auto">
-          <a href="../"><img class="h-full w-auto p-1" src="../static/patty2.png"></a>
-        </div>
-        <div class="h-full w-auto" />
-        <div class="h-full w-auto mt-4">
-          <a href="../HomeLogin" class="bg-white hover:bg-gray-200 text-black text-center py-3 px-5 rounded-full">Login</a>
-        </div>
+  <div class="bg-[#6667ba]">
+    <nav class="flex justify-between py-2 mx-8 2xl:mx-auto xl:max-w-screen-2xl">
+      <nuxt-link to="/" class="focus:outline-none">
+        <img class="h-12" src="patty-logo.png" alt="patty-logo">
+      </nuxt-link>
+      <div class="hidden gap-8 sm:flex">
+        <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
+          Login
+        </nuxt-link>
+        <nuxt-link to="/register" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+          Sign Up
+        </nuxt-link>
+      </div>
+      <div class="block sm:hidden">
+        hello
       </div>
     </nav>
   </div>
