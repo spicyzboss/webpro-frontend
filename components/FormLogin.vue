@@ -32,9 +32,9 @@
       <button class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800" @click="login">
         Login
       </button>
-      <button class="w-2/3 h-12 mt-4 text-gray-500 transition-colors duration-150 bg-white border rounded-lg focus:outline-none focus:shadow-outline hover:bg-gray-100 focus:bg-gray-100">
+      <nuxt-link to="/ReGister" class="w-2/3 h-12 mt-4 flex justify-center items-center text-gray-500 transition-colors duration-150 bg-white border rounded-lg focus:outline-none focus:shadow-outline hover:bg-gray-100 focus:bg-gray-100">
         Register
-      </button>
+      </nuxt-link>
     </div>
   </div>
 </template>

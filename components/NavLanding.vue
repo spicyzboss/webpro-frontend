@@ -8,7 +8,7 @@
         <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
           Login
         </nuxt-link>
-        <nuxt-link to="/register" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+        <nuxt-link to="/ReGister" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
           Sign Up
         </nuxt-link>
       </div>
