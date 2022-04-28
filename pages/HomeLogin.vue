@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="2xl:w-[15vw] xl:w-[25vw] mt-[5%] ml-5">
-        <FormLogin />
+        <FormRegister />
       </div>
     </div>
   </div>
