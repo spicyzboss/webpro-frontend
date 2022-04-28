@@ -13,3 +13,10 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'LoginPage',
+  auth: 'guest',
+};
+</script>

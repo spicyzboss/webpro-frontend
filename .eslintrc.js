@@ -16,5 +16,6 @@ module.exports = {
     'vue/multi-word-component-names': ['error', {
       ignores: ['index', 'login'],
     }],
+    'vue/require-prop-types': 'off',
   },
 };

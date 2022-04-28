@@ -4,9 +4,9 @@
       <label for="email">Email</label>
       <input
         id="email"
+        v-model="email"
         type="email"
         name="email"
-        v-bind="email"
         placeholder="hello@emample.com"
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6667ba]"
       >
@@ -16,9 +16,9 @@
       <label for="password">Password</label>
       <input
         id="password"
+        v-model="password"
         type="password"
         name="password"
-        v-bind="password"
         placeholder="password"
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6667ba]"
       >
@@ -54,10 +54,19 @@ export default {
       const request = await this.$axios.$post('https://api.pattycommunity.com/login', {
         email: this.email,
         password: createHash('md5').update(this.password).digest('hex'),
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
 
-      if (request.status === 200) {
-        console.log(request);
+      if (request.status.code === 200) {
+        this.$auth.setToken(request.token);
+        this.$auth.setUser(request.user);
+        this.$router.push('/');
+      } else {
+        console.log(request.status.message);
       }
     },
   },

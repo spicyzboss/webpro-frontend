@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="h-max bg-white">
-      <NavLanding />
-    </div>
+    <NavLanding :user="user" />
     <div class="h-[60vh] mx-auto bg-white flex justify-center items-center">
       <HelloWorld />
     </div>
@@ -18,5 +16,12 @@
 <script>
 export default {
   name: 'IndexPage',
+  middleware: 'auth',
+  data() {
+    return {
+      user: this.$auth.user,
+      loggedIn: this.$auth.loggedIn,
+    };
+  },
 };
 </script>

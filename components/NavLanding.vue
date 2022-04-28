@@ -4,7 +4,7 @@
       <nuxt-link to="/" class="focus:outline-none">
         <img class="h-12" src="patty-logo.png" alt="patty-logo">
       </nuxt-link>
-      <div class="hidden gap-8 sm:flex">
+      <div v-if="!user" class="hidden gap-8 sm:flex">
         <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
           Login
         </nuxt-link>
@@ -18,3 +18,9 @@
     </nav>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['user'],
+};
+</script>
