@@ -62,8 +62,8 @@ export default {
       });
 
       if (request.status.code === 200) {
-        this.$auth.setToken(request.token);
-        this.$auth.setUser(request.user);
+        // this.$auth.setToken(request.token);
+        // this.$auth.setUser(request.user);
         this.$router.push('/');
       } else {
         console.log(request.status.message);

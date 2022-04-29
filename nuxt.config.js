@@ -47,17 +47,39 @@ export default {
   auth: {
     strategies: {
       local: {
+        cookie: {
+          prefix: 'patty_',
+        },
         user: {
-          property: false,
           autoFetch: false,
         },
         endpoints: {
-          // user: false,
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName: 'access_token',
+            credentials: true,
+          },
+          user: {
+            url: '/me',
+            method: 'post',
+            credentials: false,
+          },
         },
+        token: {
+          required: true,
+          type: 'Bearer',
+          global: true,
+        },
+        autoFetchUser: true,
       },
     },
     redirect: {
       login: false,
+      home: '/',
+    },
+    router: {
+      middleware: ['auth'],
     },
   },
 };

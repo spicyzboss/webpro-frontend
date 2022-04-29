@@ -4,7 +4,7 @@
       <nuxt-link to="/" class="focus:outline-none">
         <img class="h-12" src="patty-logo.png" alt="patty-logo">
       </nuxt-link>
-      <div v-if="!user" class="hidden gap-8 sm:flex">
+      <div v-if="isObjectEmpty(user)" class="hidden gap-8 sm:flex">
         <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
           Login
         </nuxt-link>
@@ -20,7 +20,19 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
-  props: ['user'],
+  data() {
+    return {
+      user: this.$auth.user,
+      loggedIn: this.$auth.loggedIn,
+    };
+  },
+  methods: {
+    isObjectEmpty(obj) {
+      return _.isEmpty(obj);
+    },
+  },
 };
 </script>
