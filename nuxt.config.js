@@ -51,7 +51,7 @@ export default {
           prefix: 'patty_',
         },
         user: {
-          autoFetch: false,
+          autoFetch: true,
         },
         endpoints: {
           login: {
@@ -62,8 +62,7 @@ export default {
           },
           user: {
             url: '/me',
-            method: 'post',
-            credentials: false,
+            method: 'get',
           },
         },
         token: {
@@ -71,15 +70,15 @@ export default {
           type: 'Bearer',
           global: true,
         },
-        autoFetchUser: true,
       },
     },
     redirect: {
       login: false,
       home: '/',
     },
-    router: {
-      middleware: ['auth'],
-    },
+  },
+
+  router: {
+    middleware: ['auth'],
   },
 };

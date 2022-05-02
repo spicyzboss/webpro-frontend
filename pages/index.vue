@@ -21,7 +21,7 @@ import _ from 'lodash';
 
 export default {
   name: 'IndexPage',
-  auth: false,
+  auth: 'guest',
   data() {
     return {
       user: this.$auth.user,
