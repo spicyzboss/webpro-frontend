@@ -8,9 +8,8 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'patty friend and community' },
       { name: 'format-detection', content: 'telephone=no' },
-      { description: 'patty friend and community' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -42,10 +41,45 @@ export default {
   build: {},
 
   axios: {
-
+    baseURL: 'https://api.pattycommunity.com',
   },
 
   auth: {
+    strategies: {
+      local: {
+        cookie: {
+          prefix: 'patty_',
+        },
+        user: {
+          autoFetch: true,
+        },
+        endpoints: {
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName: 'access_token',
+            credentials: true,
+          },
+          user: {
+            url: '/me',
+            method: 'get',
+          },
+          logout: false,
+        },
+        token: {
+          required: true,
+          type: 'Bearer',
+          global: true,
+        },
+      },
+    },
+    redirect: {
+      login: false,
+      home: '/',
+    },
+  },
 
+  router: {
+    middleware: ['auth'],
   },
 };

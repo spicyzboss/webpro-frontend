@@ -14,7 +14,8 @@ module.exports = {
     quotes: ['error', 'single'],
     'max-len': 'off',
     'vue/multi-word-component-names': ['error', {
-      ignores: ['index', 'login'],
+      ignores: ['index', 'login', 'register', 'eiei'],
     }],
+    'vue/require-prop-types': 'off',
   },
 };

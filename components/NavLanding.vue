@@ -1,16 +1,24 @@
 <template>
-  <div class="bg-[#6667ba]">
+  <div class="bg-[#6667ba] fixed w-full z-10 top-0">
     <nav class="flex justify-between py-2 mx-8 2xl:mx-auto xl:max-w-screen-2xl">
       <nuxt-link to="/" class="focus:outline-none">
         <img class="h-12" src="patty-logo.png" alt="patty-logo">
       </nuxt-link>
-      <div class="hidden gap-8 sm:flex">
+      <div v-if="isObjectEmpty(user)" class="hidden gap-8 sm:flex">
         <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
           Login
         </nuxt-link>
-        <nuxt-link to="/ReGister" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+        <nuxt-link to="/register" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
           Sign Up
         </nuxt-link>
+      </div>
+      <div v-else class="flex items-center gap-8">
+        <p class="text-white">
+          {{ user.firstname }}
+        </p>
+        <button type="button" class="px-4 py-2 text-black bg-white rounded-full place-self-center hover:bg-gray-200 focus:outline-none focus:bg-gray-200" @click="logout">
+          Logout
+        </button>
       </div>
       <div class="block sm:hidden">
         hello
@@ -18,3 +26,26 @@
     </nav>
   </div>
 </template>
+
+<script>
+import _ from 'lodash';
+
+export default {
+  data() {
+    return {
+      user: this.$auth.user,
+      loggedIn: this.$auth.loggedIn,
+    };
+  },
+  methods: {
+    isObjectEmpty(obj) {
+      return _.isEmpty(obj);
+    },
+    logout() {
+      this.$auth.logout().then(() => {
+        this.$router.go(this.$router.currentRoute);
+      });
+    },
+  },
+};
+</script>

@@ -1,12 +1,7 @@
 <template>
   <div class="p-12 bg-white border shadow-xl rounded-xl">
-    <div>
-      <p class="text-5xl font-bold">
-        Register
-      </p>
-    </div>
     <div v-if="stateCheck">
-      <div class="mt-5">
+      <div>
         <label for="email">Email</label>
         <input
           id="email"
@@ -29,14 +24,14 @@
           class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6667ba]"
         >
       </div>
-      <div class="mt-4 flex flex-col items-center">
+      <div class="flex flex-col items-center mt-4">
         <button class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800" @click="isNext">
-          next
+          Next
         </button>
       </div>
     </div>
     <div v-if="!stateCheck">
-      <div class="mt-5">
+      <div>
         <label for="fname">First Name</label>
         <input
           id="fname"
@@ -91,14 +86,14 @@
           >
         </div>
       </div>
-      <div class="mt-4 flex flex-col items-center">
+      <div class="flex flex-col items-center mt-4">
         <button class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800">
-          submit
+          Submit
         </button>
       </div>
-      <div class="mt-1 flex flex-col items-center">
+      <div class="flex flex-col items-center mt-1">
         <button class="w-2/3 h-12 mt-4 text-gray-500 transition-colors duration-150 bg-white border rounded-lg focus:outline-none focus:shadow-outline hover:bg-gray-100 focus:bg-gray-100" @click="stateCheck = !stateCheck">
-          back
+          Back
         </button>
       </div>
     </div>

@@ -4,9 +4,9 @@
       <label for="email">Email</label>
       <input
         id="email"
+        v-model="email"
         type="email"
         name="email"
-        v-bind="email"
         placeholder="hello@emample.com"
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6667ba]"
       >
@@ -16,9 +16,9 @@
       <label for="password">Password</label>
       <input
         id="password"
+        v-model="password"
         type="password"
         name="password"
-        v-bind="password"
         placeholder="password"
         class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6667ba]"
       >
@@ -32,7 +32,7 @@
       <button class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800" @click="login">
         Login
       </button>
-      <nuxt-link to="/ReGister" class="w-2/3 h-12 mt-4 flex justify-center items-center text-gray-500 transition-colors duration-150 bg-white border rounded-lg focus:outline-none focus:shadow-outline hover:bg-gray-100 focus:bg-gray-100">
+      <nuxt-link to="/register" class="flex items-center justify-center w-2/3 h-12 mt-4 text-gray-500 transition-colors duration-150 bg-white border rounded-lg focus:outline-none focus:shadow-outline hover:bg-gray-100 focus:bg-gray-100">
         Register
       </nuxt-link>
     </div>
@@ -54,10 +54,19 @@ export default {
       const request = await this.$axios.$post('https://api.pattycommunity.com/login', {
         email: this.email,
         password: createHash('md5').update(this.password).digest('hex'),
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
 
-      if (request.status === 200) {
-        console.log(request);
+      if (request.status.code === 200) {
+        this.$auth.setUserToken(request.token).then(() => {
+          this.$router.push('/');
+        });
+      } else {
+        console.log(request.status.message);
       }
     },
   },

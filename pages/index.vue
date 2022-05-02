@@ -1,43 +1,40 @@
 <template>
   <div>
-    <div v-if="false">
-      <div class="h-max bg-white">
-        <NavLanding />
+    <NavLanding />
+    <div class="pt-16">
+      <div v-if="isObjectEmpty(user)">
+        สวัสดีครับท่านสมาชิก
       </div>
-      <div class="h-[60vh] mx-auto bg-white flex justify-center items-center">
-        <HelloWorld />
-      </div>
-      <div class="h-[60vh] mx-auto bg-gray-100 flex justify-center items-center">
-        <HelloWorld />
-      </div>
-      <div class="h-[60vh] mx-auto bg-white flex justify-center items-center">
-        <HelloWorld />
-      </div>
-    </div>
-    <div class="h-full bg-gray-100">
-      <div class="h-max bg-white fixed top-0 inset-x-0 z-50">
-        <NavFeed />
-      </div>
-      <div class="h-full p-5 mt-12 max-w-xl mx-auto flex flex-col">
-        <FeedPostForm v-if="togglePost" />
-        <FeedPostFormDetail v-if="!togglePost"/>
-        <FeedPost />
-        <FeedPost />
-        <FeedPost />
-        <FeedPost />
-        <FeedPost />
+      <div v-else class="pb-4 bg-gray-100">
+        <div class="flex flex-col h-full max-w-xl mx-auto">
+          <FeedPostForm />
+          <FeedPost />
+          <FeedPost />
+          <FeedPost />
+          <FeedPost />
+          <FeedPost />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   name: 'IndexPage',
+  auth: 'guest',
   data() {
     return {
-      togglePost: true,
+      user: this.$auth.user,
+      loggedIn: this.$auth.loggedIn,
     };
+  },
+  methods: {
+    isObjectEmpty(obj) {
+      return _.isEmpty(obj);
+    },
   },
 };
 </script>
