@@ -8,7 +8,6 @@
         </p>
       </div>
       <div>
-        <FormLogin />
       </div>
     </div>
   </div>

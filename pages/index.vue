@@ -14,23 +14,18 @@
         <HelloWorld />
       </div>
     </div>
-    <div class="h-screen bg-gray-100">
-      <div class="h-max bg-white">
+    <div class="h-full bg-gray-100">
+      <div class="h-max bg-white fixed top-0 inset-x-0 z-50">
         <NavFeed />
       </div>
-      <div class="h-[90vh] my-0 p-5 max-w-xl mx-auto flex flex-col overflow-y-scroll">
-        <div>
-          <FeedPost />
-        </div>
-        <div>
-          <FeedPost />
-        </div><div>
-          <FeedPost />
-        </div><div>
-          <FeedPost />
-        </div><div>
-          <FeedPost />
-        </div>
+      <div class="h-full p-5 mt-12 max-w-xl mx-auto flex flex-col">
+        <FeedPostForm v-if="togglePost" />
+        <FeedPostFormDetail v-if="!togglePost"/>
+        <FeedPost />
+        <FeedPost />
+        <FeedPost />
+        <FeedPost />
+        <FeedPost />
       </div>
     </div>
   </div>
@@ -39,5 +34,10 @@
 <script>
 export default {
   name: 'IndexPage',
+  data() {
+    return {
+      togglePost: true,
+    };
+  },
 };
 </script>
