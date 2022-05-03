@@ -1,5 +1,6 @@
 <template>
   <div class="p-12 bg-white border shadow-xl rounded-xl">
+    <AlertDanger :message="error" />
     <div>
       <label for="email">Email</label>
       <input
@@ -47,6 +48,7 @@ export default {
     return {
       email: '',
       password: '',
+      error: '',
     };
   },
   methods: {
@@ -66,7 +68,10 @@ export default {
           this.$router.push('/');
         });
       } else {
-        console.log(request.status.message);
+        this.error = request.status.message;
+        new Promise((resolve) => { setTimeout(resolve, 3000); }).then(() => {
+          this.error = '';
+        });
       }
     },
   },

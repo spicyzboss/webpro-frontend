@@ -3,11 +3,11 @@
     <div class="flex w-full p-3">
       <div class="flex">
         <div class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full">
-          <img src="https://avatars0.githubusercontent.com/u/38799309?v=4" alt="profilepic">
+          <img src="/profile.png" alt="profilepic">
         </div>
       </div>
       <div v-if="!posting" class="w-full ml-2">
-        <button class="w-full px-4 py-2 text-left text-gray-400 bg-gray-100 rounded-xl hover:bg-gray-300" @click="openPostDetail">
+        <button class="w-full px-4 py-2 text-left text-[#6B6B6B] bg-gray-100 rounded-xl hover:bg-gray-300" @click="openPostDetail">
           What you want create a party
         </button>
       </div>
@@ -19,7 +19,7 @@
             type="text"
             name="topic"
             placeholder="Topic..."
-            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl placeholder:text-gray-400"
+            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl placeholder:text-[#6B6B6B]"
           >
         </div>
         <div class="w-full mt-2">
@@ -29,7 +29,7 @@
             type="description"
             name="description"
             placeholder="Description..."
-            class="w-full h-16 px-4 py-2 text-left text-gray-600 bg-gray-100 resize-none placeholder:text-gray-400 rounded-xl"
+            class="w-full h-16 px-4 py-2 text-left text-gray-600 bg-gray-100 resize-none placeholder:text-[#6B6B6B] rounded-xl"
           />
         </div>
         <div class="w-full">

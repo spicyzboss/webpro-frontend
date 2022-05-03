@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'patty',
+    title: 'Patty',
     htmlAttrs: {
       lang: 'en',
     },
@@ -11,7 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: 'patty friend and community' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-png', href: '/patty-icon.png' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

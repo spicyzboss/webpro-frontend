@@ -1,11 +1,18 @@
 <template>
   <div class="static w-full mt-4 bg-white border rounded-lg drop-shadow-md">
     <div class="flex justify-between w-full p-3">
-      <div class="flex">
-        <div class="flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-500 rounded-full">
-          <img src="https://avatars0.githubusercontent.com/u/38799309?v=4" alt="profilepic">
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full">
+          <img src="/profile.png" alt="profilepic">
         </div>
-        <span class="pt-1 ml-2 font-bold text-md">braydoncoyer</span>
+        <div class="flex flex-col ml-2">
+          <p class="font-bold">
+            braydoncoyer
+          </p>
+          <p class="text-sm text-gray-400">
+            3/5/2565 07:32:58
+          </p>
+        </div>
       </div>
       <svg class="h-4 cursor-pointer fill-current text-grey-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z" /></svg>
     </div>
