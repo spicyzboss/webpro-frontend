@@ -5,7 +5,9 @@
       <div v-if="isObjectEmpty(user)">
         สวัสดีครับท่านสมาชิก
       </div>
-      <div v-else-if="false" class="pb-4 bg-gray-100">
+      <div v-else-if="true" class="relative pb-4 bg-gray-100 ">
+        <div class="h-2 xl:h-0" />
+        <FeedFilter />
         <div class="flex flex-col h-full max-w-xl min-h-screen mx-auto">
           <FeedPostForm />
           <FeedPost />

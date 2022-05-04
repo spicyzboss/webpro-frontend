@@ -237,30 +237,34 @@ export default {
     },
     alertMessage(msg) {
       this.error = msg;
-      new Promise((resolve) => { setTimeout(resolve, 3000); }).then(() => {
+      new Promise((resolve) => { setTimeout(resolve, 5000); }).then(() => {
         this.error = '';
       });
     },
     checkRegFirst() {
-      if (!this.email) {
-        this.alertMessage('Email bruh');
-      } else if (!this.password) {
-        this.alertMessage('Password bruh');
-      } else if (this.confirmPassword !== '') {
-        this.alertMessage('Confirm password bruh');
+      if (this.email === '') {
+        this.alertMessage('Please enter your email.');
+      } else if (!this.email) {
+        this.alertMessage('This email is already in use.');
+      } else if (this.password === '') {
+        this.alertMessage('Please enter your password.');
+      } else if (this.confirmPassword === '') {
+        this.alertMessage('Please enter confirm password.');
+      } else if (this.confirmPassword.length < 8) {
+        this.alertMessage('Please enter a password of more than 8 characters.');
       } else if (this.password !== this.confirmPassword) {
-        this.alertMessage('Password not Confirm');
+        this.alertMessage('Confirmed password is incorrect.');
       } else {
         this.isNext();
       }
     },
     checkRegLast() {
       if (this.fname === '') {
-        this.alertMessage('Enter your first name');
+        this.alertMessage('Please enter your first name.');
       } else if (this.lname === '') {
-        this.alertMessage('Enter your last name');
+        this.alertMessage('Please enter your last name.');
       } else if (this.birthday === '') {
-        this.alertMessage('Enter your birth date');
+        this.alertMessage('Please enter your birth date.');
       }
     },
   },

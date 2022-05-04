@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#6667ba] fixed w-full z-10 top-0 drop-shadow-xl">
+  <div class="bg-[#6667ba] fixed w-full z-10 top-0 drop-shadow-xl z-20">
     <nav class="flex justify-between py-2 mx-4">
       <nuxt-link to="/" class="focus:outline-none">
         <img class="w-40 h-12" src="/patty-logo.png" alt="patty-logo">
