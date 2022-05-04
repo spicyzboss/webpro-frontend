@@ -5,14 +5,26 @@
       <div v-if="isObjectEmpty(user)">
         สวัสดีครับท่านสมาชิก
       </div>
-      <div v-else class="pb-4 bg-gray-100">
-        <div class="flex flex-col h-full max-w-xl mx-auto">
+      <div v-else-if="false" class="pb-4 bg-gray-100">
+        <div class="flex flex-col h-full max-w-xl min-h-screen mx-auto">
           <FeedPostForm />
           <FeedPost />
           <FeedPost />
           <FeedPost />
           <FeedPost />
           <FeedPost />
+          <FeedPost />
+          <FeedPost />
+          <FeedPost />
+        </div>
+      </div>
+      <div v-else class="pb-4 bg-gray-100">
+        <div class="flex flex-col items-center h-full max-w-xl min-h-screen mx-auto">
+          <FeedMatch />
+          <FeedMatch />
+          <FeedMatch />
+          <FeedMatch />
+          <FeedMatch />
         </div>
       </div>
     </div>
