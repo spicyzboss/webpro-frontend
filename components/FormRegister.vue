@@ -237,7 +237,7 @@
                 <a
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  @click="selectGender('Male')"
+                  @click="selectGender('MALE')"
                   >Male</a
                 >
               </li>
@@ -245,7 +245,7 @@
                 <a
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  @click="selectGender('Female')"
+                  @click="selectGender('FEMALE')"
                   >Female</a
                 >
               </li>
@@ -253,7 +253,7 @@
                 <a
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  @click="selectGender('Other')"
+                  @click="selectGender('OTHER')"
                   >Other</a
                 >
               </li>
@@ -280,10 +280,33 @@
           />
         </div>
       </div>
+      <div class="mt-5 w-36">
+        <label for="image">Upload</label>
+        <input
+          ref="image"
+          type="file"
+          accept="image/*"
+          name="image"
+          class="
+            w-full
+            px-4
+            py-2
+            mt-2
+            border
+            rounded-md
+            focus:outline-none focus:ring-2 focus:ring-[#6667ba]
+          "
+        />
+      </div>
       <div class="flex flex-col items-center mt-4">
         <button
           class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg  focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800"
-          @click="checkRegLast"
+          @click="
+            () => {
+              checkRegLast();
+              register();
+            }
+          "
         >
           Submit
         </button>
@@ -301,6 +324,7 @@
 </template>
 
 <script>
+import { createHash } from "crypto";
 export default {
   data() {
     return {
@@ -309,8 +333,9 @@ export default {
       confirmPassword: "",
       fname: "",
       lname: "",
-      gender: "Male",
+      gender: "MALE",
       birthday: "",
+      image: null,
       stateCheck: true,
       toggleDrop: false,
       error: "",
@@ -376,23 +401,31 @@ export default {
       }
     },
     async register() {
+      const formData = new FormData();
+      formData.append("email", this.email);
+      formData.append(
+        "password",
+        createHash("md5").update(this.password).digest("hex")
+      );
+      formData.append("firstname", this.fname);
+      formData.append("lastname", this.lname);
+      formData.append("gender", this.gender);
+      formData.append("profile_image", this.$refs.image.files[0]);
+      formData.append("birth_date", new Date(this.birthday).toISOString());
       const request = await this.$axios.$post(
+        //"http://localhost:5500/register",
         "https://api.pattycommunity.com/register",
-        {
-          email: this.email,
-          password: createHash("md5").update(this.password).digest("hex"),
-          firstname: this.fname,
-          lastname: this.lname,
-          gender: this.gender,
-          birth_date: this.birthday,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
           },
         }
       );
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
       if (request.status.code === 200) {
         this.$router.push("/");
       } else {
