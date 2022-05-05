@@ -99,8 +99,8 @@
 <script>
 import { io } from 'socket.io-client';
 
-// const socket = io('wss://api.pattycommunity.com/');
-const socket = io('ws://localhost:9999/');
+const socket = io('wss://api.pattycommunity.com/');
+// const socket = io('ws://localhost:9999/');
 
 export default {
   data() {
@@ -124,7 +124,7 @@ export default {
     },
   },
   async created() {
-    const { chat, user, status } = await this.$axios.$get('http://localhost:9999/chat');
+    const { chat, user, status } = await this.$axios.$get('/chat');
     if (status.code === 200) {
       this.chats = chat;
       this.users = user.filter((v) => v.id !== this.$auth.user.id);
@@ -143,10 +143,18 @@ export default {
     async sendMessage() {
       if (this.message.length > 0) {
         socket.emit('chat', {
-          from: this.$auth.user.id,
-          to: this.selectedUser,
-          content: this.message,
-          created_at: new Date().toISOString(),
+          chat: {
+            from: this.$auth.user.id,
+            to: this.selectedUser,
+            content: this.message,
+            created_at: new Date().toISOString(),
+          },
+          user: {
+            id: this.$auth.user.id,
+            firstname: this.$auth.user.firstname,
+            lastname: this.$auth.user.lastname,
+            profile_image: this.$auth.user.profile_image,
+          },
         });
         this.message = '';
       }
