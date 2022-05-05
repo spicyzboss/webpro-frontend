@@ -335,23 +335,26 @@ export default {
       });
     },
     async checkRegFirst() {
-      const request = await this.$axios.$post(
-        "https://api.pattycommunity.com/register",
-        {
-          email: this.email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
       if (this.email === "") {
         this.alertMessage("Please enter your email.");
-      } else if (request.status.code === 401) {
-        this.alertMessage(req.status.message);
-      } else if (this.password === "") {
+      } else {
+        const request = await this.$axios.$post(
+          "https://api.pattycommunity.com/check_email",
+          {
+            email: this.email,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        );
+        if (request.status.code === 400) {
+          this.alertMessage(request.status.message);
+        }
+      }
+      if (this.password === "") {
         this.alertMessage("Please enter your password.");
       } else if (this.confirmPassword === "") {
         this.alertMessage("Please enter confirm password.");
