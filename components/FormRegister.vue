@@ -19,7 +19,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
       </div>
       <div class="relative mt-4">
         <label for="password">Password</label>
@@ -38,7 +38,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-3 mt-8 text-sm"
         >
@@ -96,7 +96,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-3 mt-8 text-sm leading-5 "
         >
@@ -164,7 +164,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
       </div>
       <div class="mt-5">
         <label for="fname">Last Name</label>
@@ -183,7 +183,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
       </div>
       <div class="flex flex-row justify-between">
         <div class="mt-5 w-36">
@@ -238,24 +238,21 @@
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   @click="selectGender('MALE')"
-                  >Male</a
-                >
+                >Male</a>
               </li>
               <li>
                 <a
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   @click="selectGender('FEMALE')"
-                  >Female</a
-                >
+                >Female</a>
               </li>
               <li>
                 <a
                   href="#"
                   class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   @click="selectGender('OTHER')"
-                  >Other</a
-                >
+                >Other</a>
               </li>
             </ul>
           </div>
@@ -277,7 +274,7 @@
               rounded-md
               focus:outline-none focus:ring-2 focus:ring-[#6667ba]
             "
-          />
+          >
         </div>
       </div>
       <div class="mt-5 w-36">
@@ -296,7 +293,7 @@
             rounded-md
             focus:outline-none focus:ring-2 focus:ring-[#6667ba]
           "
-        />
+        >
       </div>
       <div class="flex flex-col items-center mt-4">
         <button
@@ -324,21 +321,22 @@
 </template>
 
 <script>
-import { createHash } from "crypto";
+import { createHash } from 'crypto';
+
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      fname: "",
-      lname: "",
-      gender: "MALE",
-      birthday: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
+      fname: '',
+      lname: '',
+      gender: 'MALE',
+      birthday: '',
       image: null,
       stateCheck: true,
       toggleDrop: false,
-      error: "",
+      error: '',
       showPassword: true,
       showConfirmPassword: true,
     };
@@ -356,84 +354,84 @@ export default {
       new Promise((resolve) => {
         setTimeout(resolve, 5000);
       }).then(() => {
-        this.error = "";
+        this.error = '';
       });
     },
     async checkRegFirst() {
-      if (this.email === "") {
-        this.alertMessage("Please enter your email.");
+      if (this.email === '') {
+        this.alertMessage('Please enter your email.');
       } else {
         const request = await this.$axios.$post(
-          "https://api.pattycommunity.com/check_email",
+          'https://api.pattycommunity.com/check_email',
           {
             email: this.email,
           },
           {
             headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
             },
-          }
+          },
         );
         if (request.status.code === 400) {
           this.alertMessage(request.status.message);
         }
       }
-      if (this.password === "") {
-        this.alertMessage("Please enter your password.");
-      } else if (this.confirmPassword === "") {
-        this.alertMessage("Please enter confirm password.");
+      if (this.password === '') {
+        this.alertMessage('Please enter your password.');
+      } else if (this.confirmPassword === '') {
+        this.alertMessage('Please enter confirm password.');
       } else if (this.confirmPassword.length < 8) {
-        this.alertMessage("Please enter a password of more than 8 characters.");
+        this.alertMessage('Please enter a password of more than 8 characters.');
       } else if (this.password !== this.confirmPassword) {
-        this.alertMessage("Confirmed password is incorrect.");
+        this.alertMessage('Confirmed password is incorrect.');
       } else {
         this.isNext();
       }
     },
     checkRegLast() {
-      if (this.fname === "") {
-        this.alertMessage("Please enter your first name.");
-      } else if (this.lname === "") {
-        this.alertMessage("Please enter your last name.");
-      } else if (this.birthday === "") {
-        this.alertMessage("Please enter your birth date.");
+      if (this.fname === '') {
+        this.alertMessage('Please enter your first name.');
+      } else if (this.lname === '') {
+        this.alertMessage('Please enter your last name.');
+      } else if (this.birthday === '') {
+        this.alertMessage('Please enter your birth date.');
       }
     },
     async register() {
       const formData = new FormData();
-      formData.append("email", this.email);
+      formData.append('email', this.email);
       formData.append(
-        "password",
-        createHash("md5").update(this.password).digest("hex")
+        'password',
+        createHash('md5').update(this.password).digest('hex'),
       );
-      formData.append("firstname", this.fname);
-      formData.append("lastname", this.lname);
-      formData.append("gender", this.gender);
-      formData.append("profile_image", this.$refs.image.files[0]);
-      formData.append("birth_date", new Date(this.birthday).toISOString());
+      formData.append('firstname', this.fname);
+      formData.append('lastname', this.lname);
+      formData.append('gender', this.gender);
+      formData.append('profile_image', this.$refs.image.files[0]);
+      formData.append('birth_date', new Date(this.birthday).toISOString());
       const request = await this.$axios.$post(
-        //"http://localhost:5500/register",
-        "https://api.pattycommunity.com/register",
+        // "http://localhost:5500/register",
+        'https://api.pattycommunity.com/register',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*',
           },
-        }
+        },
       );
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
+      for (const pair of formData.entries()) {
+        console.log(`${pair[0]}, ${pair[1]}`);
       }
       if (request.status.code === 200) {
-        this.$router.push("/");
+        this.$router.push('/');
       } else {
         this.error = request.status.message;
         new Promise((resolve) => {
           setTimeout(resolve, 3000);
         }).then(() => {
-          this.error = "";
+          this.error = '';
         });
       }
     },

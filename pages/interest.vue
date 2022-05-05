@@ -4,50 +4,39 @@
     <div class="h-full pt-16">
       <div class="grid w-full h-full grid-cols-2">
         <div class="w-full h-full overflow-y-auto bg-gray-200 border-r border-gray-300">
-          <div class="relative flex items-center justify-center w-full h-12 bg-white border border-b">
-            <div class="flex items-center justify-between w-full">
-              <p class="ml-2 text-xl font-bold">
-                Interest
+          <div class="flex flex-col items-center w-full h-full">
+            <div class="static w-[70%] mt-4 overflow-hidden bg-white border rounded-lg drop-shadow-md">
+              <div>
+                <img src="/profile.png" alt="profilepic" class="w-full h-1/2">
+              </div>
+            </div>
+            <div class="w-[70%] p-4 mt-3 rounded-md flex justify-center items-center bg-white">
+              <p class="text-2xl">
+                John Mayer
               </p>
-              <button class="flex items-center justify-center h-8 w-14 p-2 m-2 rounded-lg text-white bg-[#6667ba] hover:bg-[#494a86]">
+            </div>
+            <div class="w-[70%] mt-3 rounded-md flex justify-center items-center">
+              <button class="p-4 w-1/2 rounded-xl text-xl text-white hover:bg-[#414276] bg-[#6667ba]">
                 Save
               </button>
             </div>
           </div>
-          <div class="relative w-auto m-4 bg-white border border-b rounded-lg hover:bg-gray-400">
-            <div class="flex w-full p-3">
-              <div class="flex w-full">
-                <div class="flex flex-col w-3/4 ml-2">
-                  <p class="text-xl">
-                    Selected
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="relative w-auto m-4 bg-white border border-b rounded-lg hover:bg-gray-400">
-            <div class="flex w-full p-3">
-              <div class="flex w-full">
-                <div class="flex flex-col w-3/4 ml-2">
-                  <p class="text-xl">
-                    Selected
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="flex flex-col w-full h-full bg-gray-200 border">
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
-          <SelectInterest />
+        <div class="flex flex-col items-center w-full h-full bg-gray-200 border">
+          <div class="w-[70%] p-4 mt-3 rounded-md flex flex-col items-center bg-white">
+            <div class="relative w-full h-12 m-2 bg-white border border-b rounded-lg">
+              <div class="flex w-full p-3">
+                <div class="flex w-full">
+                  <div class="max-w-sm mx-auto">
+                    <label class="inline-flex items-center">
+                      <input class="w-4 h-4 mr-2 text-indigo-500 border border-gray-300 rounded focus:ring-indigo-400 focus:ring-opacity-25" type="checkbox">
+                      Interest
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

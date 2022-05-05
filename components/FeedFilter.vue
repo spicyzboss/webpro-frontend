@@ -27,11 +27,10 @@
     >
       <li v-for="interest in interestFilter" :key="interest.name">
         <a
-          @click="selected(interest)"
           href="#"
           class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-          >{{ interest.name }}</a
-        >
+          @click="selected(interest)"
+        >{{ interest.name }}</a>
       </li>
     </ul>
   </div>
@@ -42,26 +41,26 @@ export default {
     return {
       toggleFilter: false,
       interestFilter: [],
-      interestSelected: "",
+      interestSelected: '',
     };
+  },
+  async created() {
+    const request = await this.$axios.$get(
+      // "http://localhost:5500/get_interest",
+      'https://api.pattycommunity.com/get_interest',
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Access-Control-Allow-Origin': '*',
+        },
+      },
+    );
+    this.interestFilter = [...request.interestName];
   },
   methods: {
     selected(itr) {
       this.interestSelected = itr.name;
     },
-  },
-  async created() {
-    const request = await this.$axios.$get(
-      //"http://localhost:5500/get_interest",
-      "https://api.pattycommunity.com/get_interest",
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
-    this.interestFilter = [...request.interestName];
   },
 };
 </script>
