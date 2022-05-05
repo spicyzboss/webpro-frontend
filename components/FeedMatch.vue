@@ -15,7 +15,7 @@
       "
     >
       <div>
-        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2" />
+        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2">
       </div>
       <div class="p-4">
         <p class="text-2xl">
@@ -71,35 +71,32 @@ export default {
   },
   async created() {
     const request = await this.$axios.$post(
-      "/get_usameint",
+      '/get_usameint',
       {
         id: this.$auth.user.id,
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
     this.userList = [...request.ListUser];
-    console.log(request, this.$auth.user.id);
     const reqPic = await this.$axios.$post(
-      "/get_profilebyid",
+      '/get_profilebyid',
       {
         post: this.userList,
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
     this.userItem = [...reqPic.userPic];
-    console.log(this.userItem);
     this.memberItem = [...reqPic.memberItem];
-    console.log(this.memberItem);
     for (const user of this.userList) {
       for (const item of this.userItem) {
         for (const member of this.memberItem) {
@@ -115,7 +112,6 @@ export default {
         }
       }
     }
-    console.log(this.itemAll);
 
     // const reqint = await this.$axios.$post(
     //   "/get_intbyid",
@@ -135,17 +131,17 @@ export default {
   methods: {
     async addFriend(idt) {
       await this.$axios.$post(
-        "/add_match",
+        '/add_match',
         {
           userid: this.$auth.user.id,
           id: idt,
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
-        }
+        },
       );
     },
   },
