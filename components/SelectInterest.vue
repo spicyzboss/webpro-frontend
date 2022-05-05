@@ -1,49 +1,29 @@
 <template>
- <div class="static z-0 w-full mt-4 bg-white border rounded-lg drop-shadow-md">
+  <div class="static z-0 w-full mt-4 bg-white border rounded-lg drop-shadow-md">
     <div class="flex w-full p-3">
-      <div class="flex">
-          <div class="flex w-full p-3">
-          <div class="flex w-full">
-            <button
-              class="
-                w-full
-                px-4
-                py-2
-                text-left text-[#6B6B6B]
-                bg-gray-100
-                rounded-xl
-                hover:bg-gray-300
-              "
-              @click="toggleFilter = !toggleFilter"
+      <div>
+        <div
+          class="flex flew-row"
+          v-for="(interest, index) in interestFilter"
+          :key="interest.name"
+        >
+          <div class="form-check">
+            <input
+              id="flexCheckDefault"
+              class="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer  form-check-input checked:bg-indigo-700 checked:border-indigo-700 focus:outline-none"
+              type="checkbox"
+              :value="interest.name"
+              :checked="condition[index] == true"
+              @click="insertToList(interest.name, index)"
+            />
+            <label
+              class="inline-block text-gray-800 form-check-label"
+              for="flexCheckDefault"
             >
-              select interest
-            </button>
+              {{ interest.name }}
+            </label>
           </div>
         </div>
-        <ul
-          v-if="toggleFilter"
-          id="dropdown"
-          class="absolute z-10 overflow-y-scroll bg-white divide-y divide-gray-100 rounded shadow h-28 w-44 dark:bg-gray-700"
-        >
-          <li v-for="(interest, index) in interestFilter" :key="interest.name">
-            <div class="form-check">
-              <input
-                id="flexCheckDefault"
-                class="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-indigo-700 checked:border-indigo-700 focus:outline-none"
-                type="checkbox"
-                :value="interest.name"
-                :checked="condition[index] == true"
-                @click="insertToList(interest.name, index)"
-              />
-              <label
-                class="inline-block text-gray-800 form-check-label"
-                for="flexCheckDefault"
-              >
-                {{ interest.name }}
-              </label>
-            </div>
-          </li>
-        </ul>
         <div class="flex justify-end w-full gap-4 mt-4">
           <button
             class="
@@ -60,30 +40,31 @@
             Save
           </button>
         </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
+</template>
 <script>
-
-
-export default ({
-    data() {
-        return {
-     toggleFilter: false,
+export default {
+  data() {
+    return {
+      toggleFilter: false,
       interestFilter: [],
-        }
-    },
-    methods:{
-        insertToList(bname, index) {
+      interestId: [],
+      condition: [],
+      selectedList: [],
+    };
+  },
+  methods: {
+    insertToList(bname, index) {
       this.selectedList.push({ name: bname });
       this.condition[index] = true;
     },
-        async createInterest(){
-            await this.$axios.$post(
-        "/add_memberinterest",
+    async createInterest() {
+      const reqone = await this.$axios.$post(
+        "/get_idbyinterest",
         {
-          id: this.$auth.user.id
-          interest: 
+          interest: this.selectedList,
         },
         {
           headers: {
@@ -92,9 +73,24 @@ export default ({
           },
         }
       );
+
+      this.selectedId = [...reqone.interestId];
+      await this.$axios.$post(
+        "/add_memberinterest",
+        {
+          id: this.$auth.user.id,
+          interest: this.selectedId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
         }
-    }
-    async created() {
+      );
+    },
+  },
+  async created() {
     const request = await this.$axios.$get("/get_interest", {
       headers: {
         "Content-Type": "application/json",
@@ -103,8 +99,7 @@ export default ({
     });
 
     this.interestFilter = [...request.interestName];
-
     this.condition = Array(this.interestFilter.length).fill(false);
-    this.userImage = this.$auth.user.profile_image;
-})
+  },
+};
 </script>
