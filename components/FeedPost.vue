@@ -10,12 +10,10 @@
           <div
             class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full "
           >
-            <img :src="data.profile_image" alt="profilepic">
+            <img :src="data.profile_image" alt="profilepic" />
           </div>
           <div class="flex flex-col ml-2">
-            <p class="font-bold">
-              {{ data.firstname }} {{ data.lastname }}
-            </p>
+            <p class="font-bold">{{ data.firstname }} {{ data.lastname }}</p>
             <p class="text-sm text-gray-400">
               {{ data.created_at }}
             </p>
@@ -32,9 +30,6 @@
         </svg>
       </div>
       <div class="max-w-lg px-4 h-max">
-        <h2 class="w-full text-2xl font-semibold text-gray-800">
-          Design Tools
-        </h2>
         <p class="mt-2 text-gray-600">
           {{ data.content }}
         </p>
@@ -42,7 +37,7 @@
           Date: {{ data.finish_at }}
         </h2>
         <div
-          v-if="data.post_by === checkedUser"
+          v-if="data.post_by != checkedUser"
           class="flex flex-row items-center my-3"
         >
           <svg
@@ -58,7 +53,7 @@
       </div>
       <div class="pb-14" />
       <div
-        v-if="data.post_by === checkedUser"
+        v-if="data.post_by != checkedUser"
         class="absolute inset-x-0 bottom-0 w-full h-12"
       >
         <button
@@ -90,33 +85,31 @@ export default {
       userItem: [],
       memberItem: [],
       checkedUser: null,
+      userImage: null,
     };
   },
   async created() {
-    const request = await this.$axios.$get(
-      '/get_postdata',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+    const request = await this.$axios.$get("/get_postdata", {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
-    );
+    });
 
     this.postNormal = [...request.postby];
     this.postData = [...request.postx];
 
     const reqPic = await this.$axios.$post(
-      '/get_profilebyid',
+      "/get_profilebyid",
       {
         post: this.postNormal,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
     this.userItem = [...reqPic.userPic];
     this.memberItem = [...reqPic.memberItem];
@@ -139,6 +132,7 @@ export default {
       }
     }
     this.checkedUser = this.$auth.user.id;
+    this.userImage = this.$auth.user.profile_image;
   },
 };
 </script>

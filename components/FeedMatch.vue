@@ -15,12 +15,12 @@
       "
     >
       <div>
-        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2">
+        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2" />
       </div>
       <div class="p-4">
         <p class="text-2xl">
           <span class="font-bold">Name:</span>
-          {{ item.firstname }} {{ item.lastname }}
+          {{ item.firstname }}&nbsp; &nbsp;{{ item.lastname }}
         </p>
         <!-- <p class="text-2xl">
           <span class="font-bold">Age:</span>
@@ -30,10 +30,12 @@
           <span class="font-bold">Gender:</span>
           {{ item.gender }}
         </p>
-        <p class="text-2xl">
+        <!-- <p class="text-2xl">
           <span class="font-bold">Interest:</span>
-          <span class="p-1 m-1 bg-[#b66db0] rounded-2xl text-white">Guitar</span>
-        </p>
+          <span class="p-1 m-1 bg-[#b66db0] rounded-2xl text-white"
+            >Guitar</span
+          >
+        </p> -->
       </div>
       <div class="pb-14" />
       <div class="absolute inset-x-0 bottom-0 w-full h-12">
@@ -44,7 +46,7 @@
               ? 'pointer-events-none bg-gray-300'
               : 'bg-[#6667ba] hover:bg-[#494a86]',
           ]"
-          @click="addFriend"
+          @click="addFriend(item.id)"
         >
           Interest
         </button>
@@ -63,37 +65,41 @@ export default {
       userItem: [],
       memberItem: [],
       itemAll: [],
+      interestId: [],
+      interestName: [],
     };
   },
   async created() {
-    const request = await this.$axios.$get(
-      '/get_usameint',
+    const request = await this.$axios.$post(
+      "/get_usameint",
       {
         id: this.$auth.user.id,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
     this.userList = [...request.ListUser];
-
+    console.log(request, this.$auth.user.id);
     const reqPic = await this.$axios.$post(
-      '/get_profilebyid',
+      "/get_profilebyid",
       {
         post: this.userList,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
     this.userItem = [...reqPic.userPic];
+    console.log(this.userItem);
     this.memberItem = [...reqPic.memberItem];
+    console.log(this.memberItem);
     for (const user of this.userList) {
       for (const item of this.userItem) {
         for (const member of this.memberItem) {
@@ -109,20 +115,37 @@ export default {
         }
       }
     }
+    console.log(this.itemAll);
+
+    // const reqint = await this.$axios.$post(
+    //   "/get_intbyid",
+    //   {
+    //     member: this.ListUser,
+    //   },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Access-Control-Allow-Origin": "*",
+    //     },
+    //   }
+    // );
+    // this.interestId = [...reqint.memeberInterest];
+    // console.log(this.interestId);
   },
   methods: {
-    async addFriend() {
+    async addFriend(idt) {
       await this.$axios.$post(
-        '/add_match',
+        "/add_match",
         {
           userid: this.$auth.user.id,
+          id: idt,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
           },
-        },
+        }
       );
     },
   },
