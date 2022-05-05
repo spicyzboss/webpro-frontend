@@ -157,8 +157,8 @@ export default {
     },
     async createPost() {
       const reqone = await this.$axios.$post(
-        "http://localhost:5500/get_idbypost",
-        // "https://api.pattycommunity.com/get_idbypost",
+        //"http://localhost:5500/get_idbypost",
+        "https://api.pattycommunity.com/get_idbypost",
         {
           interest: this.selectedList,
         },
@@ -173,8 +173,8 @@ export default {
       this.selectedId = [...reqone.interestId];
       console.log(this.selectedId);
       const reqtwo = await this.$axios.$post(
-        "http://localhost:5500/post",
-        //"https://api.pattycommunity.com/post",
+        //"http://localhost:5500/post",
+        "https://api.pattycommunity.com/post",
         {
           post_by: this.$auth.user.id,
           content: this.description,

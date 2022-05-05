@@ -90,8 +90,8 @@ export default {
   },
   async created() {
     const request = await this.$axios.$get(
-      "http://localhost:5500/get_postdata",
-      //"https://api.pattycommunity.com/get_postdata",
+      //"http://localhost:5500/get_postdata",
+      "https://api.pattycommunity.com/get_postdata",
       {
         headers: {
           "Content-Type": "application/json",
@@ -104,8 +104,8 @@ export default {
     this.postData = [...request.postx];
 
     const reqPic = await this.$axios.$post(
-      "http://localhost:5500/get_profilebyid",
-      //"https://api.pattycommunity.com/get_postdata",
+      //"http://localhost:5500/get_profilebyid",
+      "https://api.pattycommunity.com/get_profilebyid",
       {
         post: this.postNormal,
       },
