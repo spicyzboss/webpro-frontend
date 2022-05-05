@@ -5,7 +5,7 @@
       <div class="grid w-full h-full xl:grid-cols-4">
         <div class="hidden w-full h-full overflow-y-auto xl:flex xl:flex-col">
           <div class="flex w-full p-4 border-b">
-            <div class="flex w-full">
+            <div class="relative flex w-full">
               <input
                 v-model="search"
                 class="w-full px-4 py-2 text-left text-[#6B6B6B] bg-gray-100 rounded-xl hover:bg-gray-200"
@@ -49,7 +49,27 @@
                   </p>
                 </div>
               </div>
-              <svg class="h-6 cursor-pointer fill-current text-grey-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z" /></svg>
+              <div class="flex items-center">
+                <input
+                  v-if="toggleReport"
+                  id="report"
+                  v-model="report"
+                  type="report"
+                  name="report"
+                  placeholder=""
+                  class="
+            w-lg
+            h-10
+            border
+            rounded-md
+            focus:outline-none focus:ring-2 focus:ring-[#ee4545]
+          "
+                >
+                <button v-if="toggleReport" class="flex justify-center p-2 mx-2 text-white bg-red-500 rounded-lg">
+                  Report
+                </button>
+                <svg class="h-6 cursor-pointer fill-current text-grey-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="toggleReport = !toggleReport"><path d="M5 10a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4zm7 0a1.999 1.999 0 1 0 0 4 1.999 1.999 0 1 0 0-4z" /></svg>
+              </div>
             </div>
             <div ref="message" class="flex flex-col w-full h-full pb-4 overflow-y-scroll">
               <template v-for="chat in selectedChat">
@@ -99,8 +119,8 @@
 <script>
 import { io } from 'socket.io-client';
 
-// const socket = io('wss://api.pattycommunity.com/');
-const socket = io('ws://localhost:9999/');
+const socket = io('wss://api.pattycommunity.com/');
+// const socket = io('ws://localhost:9999/');
 
 export default {
   data() {
@@ -110,6 +130,7 @@ export default {
       selectedUser: null,
       chats: [],
       users: [],
+      toggleReport: false,
     };
   },
   computed: {
@@ -124,7 +145,7 @@ export default {
     },
   },
   async created() {
-    const { chat, user, status } = await this.$axios.$get('http://localhost:9999/chat');
+    const { chat, user, status } = await this.$axios.$get('/chat');
     if (status.code === 200) {
       this.chats = chat;
       this.users = user.filter((v) => v.id !== this.$auth.user.id);
@@ -143,10 +164,18 @@ export default {
     async sendMessage() {
       if (this.message.length > 0) {
         socket.emit('chat', {
-          from: this.$auth.user.id,
-          to: this.selectedUser,
-          content: this.message,
-          created_at: new Date().toISOString(),
+          chat: {
+            from: this.$auth.user.id,
+            to: this.selectedUser,
+            content: this.message,
+            created_at: new Date().toISOString(),
+          },
+          user: {
+            id: this.$auth.user.id,
+            firstname: this.$auth.user.firstname,
+            lastname: this.$auth.user.lastname,
+            profile_image: this.$auth.user.profile_image,
+          },
         });
         this.message = '';
       }
