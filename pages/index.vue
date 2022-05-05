@@ -3,7 +3,7 @@
     <NavLanding />
     <div class="pt-16">
       <div v-if="isObjectEmpty(user)">
-        สวัสดีครับท่านสมาชิก
+        <LandingPage />
       </div>
       <div v-else>
         <div class="relative pb-4 bg-gray-100 ">
