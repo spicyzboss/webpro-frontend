@@ -18,26 +18,12 @@
         >
           Filter By Interest
         </button>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-8 h-8 mt-1 ml-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-          />
-        </svg>
       </div>
     </div>
-    <div
+    <ul
       v-if="toggleFilter"
       id="dropdown"
-      class="absolute z-10 overflow-y-scroll bg-white divide-y divide-gray-100 rounded shadow  h-28 w-44 dark:bg-gray-700"
+      class="absolute z-10 overflow-y-scroll bg-white divide-gray-100 rounded shadow  ulide-y h-28 w-44 dark:bg-gray-700"
     >
       <li v-for="interest in interestFilter" :key="interest.name">
         <a
@@ -47,7 +33,7 @@
           >{{ interest.name }}</a
         >
       </li>
-    </div>
+    </ul>
   </div>
 </template>
 <script>
@@ -62,7 +48,6 @@ export default {
   methods: {
     selected(itr) {
       this.interestSelected = itr.name;
-      console.log(this.interestSelected);
     },
   },
   async created() {
@@ -76,9 +61,7 @@ export default {
         },
       }
     );
-    //console.log(request.interestName);
     this.interestFilter = [...request.interestName];
-    console.log(this.interestFilter);
   },
 };
 </script>
