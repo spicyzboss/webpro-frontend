@@ -1,13 +1,26 @@
 <template>
-  <div class="static w-full mt-4 bg-white border rounded-lg drop-shadow-md z-0">
+  <div class="static z-0 w-full mt-4 bg-white border rounded-lg drop-shadow-md">
     <div class="flex w-full p-3">
       <div class="flex">
-        <div class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full">
-          <img src="/profile.png" alt="profilepic">
+        <div
+          class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full "
+        >
+          <img src="/profile.png" alt="profilepic" />
         </div>
       </div>
       <div v-if="!posting" class="w-full ml-2">
-        <button class="w-full px-4 py-2 text-left text-[#6B6B6B] bg-gray-100 rounded-xl hover:bg-gray-300" @click="openPostDetail">
+        <button
+          class="
+            w-full
+            px-4
+            py-2
+            text-left text-[#6B6B6B]
+            bg-gray-100
+            rounded-xl
+            hover:bg-gray-300
+          "
+          @click="openPostDetail"
+        >
           What you want create a party
         </button>
       </div>
@@ -19,8 +32,16 @@
             type="text"
             name="topic"
             placeholder="Topic..."
-            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl placeholder:text-[#6B6B6B]"
-          >
+            class="
+              w-full
+              px-4
+              py-2
+              text-left text-gray-600
+              bg-gray-100
+              rounded-xl
+              placeholder:text-[#6B6B6B]
+            "
+          />
         </div>
         <div class="w-full mt-2">
           <textarea
@@ -29,7 +50,17 @@
             type="description"
             name="description"
             placeholder="Description..."
-            class="w-full h-16 px-4 py-2 text-left text-gray-600 bg-gray-100 resize-none placeholder:text-[#6B6B6B] rounded-xl"
+            class="
+              w-full
+              h-16
+              px-4
+              py-2
+              text-left text-gray-600
+              bg-gray-100
+              resize-none
+              placeholder:text-[#6B6B6B]
+              rounded-xl
+            "
           />
         </div>
         <div class="w-full">
@@ -39,8 +70,8 @@
             type="date"
             name="date"
             placeholder="date"
-            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
-          >
+            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
+          />
         </div>
         <div class="flex flex-row items-center w-full gap-4 mt-2">
           <div class="flex flex-col w-full">
@@ -50,8 +81,8 @@
               v-model="startTime"
               type="time"
               name="startTime"
-              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
-            >
+              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
+            />
           </div>
           <div class="flex flex-col w-full">
             <p>Finish</p>
@@ -60,15 +91,29 @@
               v-model="finishTime"
               type="time"
               name="finishTime"
-              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
-            >
+              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
+            />
           </div>
         </div>
         <div class="flex justify-end w-full gap-4 mt-4">
-          <button class="text-gray-600 hover:underline" @click="cancelPostDetail">
+          <button
+            class="text-gray-600 hover:underline"
+            @click="cancelPostDetail"
+          >
             Cancel
           </button>
-          <button class="bg-[#6667ba] hover:bg-[#494a86] text-white py-2 px-6 rounded-full font-bold">
+          <button
+            class="
+              bg-[#6667ba]
+              hover:bg-[#494a86]
+              text-white
+              py-2
+              px-6
+              rounded-full
+              font-bold
+            "
+            @click="createPost"
+          >
             Post
           </button>
         </div>
@@ -81,11 +126,11 @@
 export default {
   data() {
     return {
-      topic: '',
-      description: '',
-      date: '',
-      startTime: '',
-      finishTime: '',
+      topic: "",
+      description: "",
+      date: "",
+      startTime: "",
+      finishTime: "",
       posting: false,
     };
   },
@@ -98,12 +143,13 @@ export default {
     },
     cancelPostDetail() {
       this.posting = false;
-      this.topic = '';
-      this.description = '';
-      this.date = '';
-      this.startTime = '';
-      this.finishTime = '';
+      this.topic = "";
+      this.description = "";
+      this.date = "";
+      this.startTime = "";
+      this.finishTime = "";
     },
+    createPost() {},
   },
 };
 </script>

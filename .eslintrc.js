@@ -17,5 +17,6 @@ module.exports = {
       ignores: ['index', 'login', 'register', 'message', 'admin', 'payment', 'interest'],
     }],
     'vue/require-prop-types': 'off',
+    'linebreak-style': 'off',
   },
 };
