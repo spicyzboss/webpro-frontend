@@ -5,7 +5,7 @@
         <div
           class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full "
         >
-          <img src="/profile.png" alt="profilepic" />
+          <img src="/profile.png" alt="profilepic">
         </div>
       </div>
       <div v-if="!posting" class="w-full ml-2">
@@ -41,7 +41,7 @@
               rounded-xl
               placeholder:text-[#6B6B6B]
             "
-          />
+          >
         </div>
         <div class="w-full mt-2">
           <textarea
@@ -70,8 +70,8 @@
             type="date"
             name="date"
             placeholder="date"
-            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
-          />
+            class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
+          >
         </div>
         <div class="flex flex-row items-center w-full gap-4 mt-2">
           <div class="flex flex-col w-full">
@@ -81,8 +81,8 @@
               v-model="startTime"
               type="time"
               name="startTime"
-              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
-            />
+              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
+            >
           </div>
           <div class="flex flex-col w-full">
             <p>Finish</p>
@@ -91,8 +91,8 @@
               v-model="finishTime"
               type="time"
               name="finishTime"
-              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
-            />
+              class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100 rounded-xl"
+            >
           </div>
         </div>
         <div class="flex justify-end w-full gap-4 mt-4">
@@ -126,11 +126,11 @@
 export default {
   data() {
     return {
-      topic: "",
-      description: "",
-      date: "",
-      startTime: "",
-      finishTime: "",
+      topic: '',
+      description: '',
+      date: '',
+      startTime: '',
+      finishTime: '',
       posting: false,
     };
   },
@@ -143,11 +143,11 @@ export default {
     },
     cancelPostDetail() {
       this.posting = false;
-      this.topic = "";
-      this.description = "";
-      this.date = "";
-      this.startTime = "";
-      this.finishTime = "";
+      this.topic = '';
+      this.description = '';
+      this.date = '';
+      this.startTime = '';
+      this.finishTime = '';
     },
     createPost() {},
   },

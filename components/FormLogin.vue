@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     async login() {
-      const request = await this.$axios.$post('https://api.pattycommunity.com/login', {
+      const request = await this.$axios.$post('/login', {
         email: this.email,
         password: createHash('md5').update(this.password).digest('hex'),
       }, {

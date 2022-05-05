@@ -9,3 +9,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  beforeCreate() {
+    if (this.$auth.user.premium) {
+      this.$router.push('/');
+    }
+  },
+};
+</script>
