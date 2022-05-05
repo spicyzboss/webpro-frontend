@@ -151,21 +151,5 @@ export default {
     },
     createPost() {},
   },
-  computed: {
-    async getInterest() {
-      const request = await this.$axios.$get(
-        "http://localhost:5500/get_interest",
-        // "https://api.pattycommunity.com/get_interest",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      //console.log(request.interestName);
-      return request.interestName;
-    },
-  },
 };
 </script>
