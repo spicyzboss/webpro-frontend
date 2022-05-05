@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-auto max-w-lg m-4 bg-white border border-b rounded-lg">
+  <div class="relative h-12 max-w-sm m-2 bg-white border border-b rounded-lg">
     <div class="flex w-full p-3">
       <div class="flex w-full">
         <div class="max-w-sm mx-auto">
