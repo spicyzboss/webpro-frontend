@@ -54,7 +54,6 @@ export default {
         },
       },
     );
-    // console.log(request.interestName);
     this.interestFilter = [...request.interestName];
   },
   methods: {
