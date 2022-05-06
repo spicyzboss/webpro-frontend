@@ -8,7 +8,7 @@
       <div v-else>
         <div class="relative pb-4 bg-gray-100">
           <div class="h-2 xl:h-0" />
-          <FeedFilter />
+          <!-- <FeedFilter /> -->
           <div class="flex flex-col h-full max-w-xl min-h-screen mx-auto">
             <FeedPostForm />
             <FeedPost />
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import _ from "lodash";
 
 export default {
-  name: 'IndexPage',
-  auth: 'guest',
+  name: "IndexPage",
+  auth: "guest",
   data() {
     return {
       user: this.$auth.user,

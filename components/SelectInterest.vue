@@ -53,6 +53,7 @@ export default {
       interestId: [],
       condition: [],
       selectedList: [],
+      selectedId: [],
     };
   },
   methods: {
@@ -62,7 +63,7 @@ export default {
     },
     async createInterest() {
       const reqone = await this.$axios.$post(
-        "/get_idbyinterest",
+        "/get_idbypost",
         {
           interest: this.selectedList,
         },
@@ -88,6 +89,7 @@ export default {
           },
         }
       );
+      this.$router.push("/");
     },
   },
   async created() {
