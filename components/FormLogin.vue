@@ -67,6 +67,7 @@ export default {
       email: '',
       password: '',
       error: '',
+      authUser: [],
     };
   },
   methods: {
@@ -84,10 +85,24 @@ export default {
           },
         },
       );
-
       if (request.status.code === 200) {
-        this.$auth.setUserToken(request.token).then(() => {
-          this.$router.push('/interest');
+        this.$auth.setUserToken(request.token).then(async () => {
+          this.authUser.push({ id: this.$auth.user.id });
+          const reqint = await this.$axios.$post(
+            '/get_intbyid',
+            { member: this.authUser },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+              },
+            },
+          );
+          console.log([...reqint.memberInterest].length);
+          if ([...reqint.memberInterest].length == 0) {
+            console.log('55');
+            this.$router.push('/interest');
+          }
         });
       } else {
         this.error = request.status.message;
