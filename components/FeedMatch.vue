@@ -118,23 +118,7 @@ export default {
         }
       }
       this.condition = Array(this.itemAll.length).fill(true);
-      console.log(this.condition);
     }
-
-    // const reqint = await this.$axios.$post(
-    //   "/get_intbyid",
-    //   {
-    //     member: this.ListUser,
-    //   },
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //   }
-    // );
-    // this.interestId = [...reqint.memeberInterest];
-    // console.log(this.interestId);
   },
   methods: {
     async addFriend(idt, index) {
@@ -153,7 +137,6 @@ export default {
       );
       this.condition[index] = false;
       this.itemAll.splice(index, 1);
-      console.log(this.itemAll);
     },
   },
 };
