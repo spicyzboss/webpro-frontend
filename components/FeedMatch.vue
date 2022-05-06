@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <di>
     <div
-      v-for="item in itemAll"
+      v-for="(item, index) in itemAll"
       :key="item.id"
       class="
         static
@@ -15,7 +15,7 @@
       "
     >
       <div>
-        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2">
+        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2" />
       </div>
       <div class="p-4">
         <p class="text-2xl">
@@ -46,13 +46,13 @@
               ? 'pointer-events-none bg-gray-300'
               : 'bg-[#6667ba] hover:bg-[#494a86]',
           ]"
-          @click="addFriend(item.id)"
+          @click="addFriend(item.id, index)"
         >
           Interest
         </button>
       </div>
     </div>
-  </div>
+  </di>
 </template>
 <script>
 /* eslint-disable no-restricted-syntax */
@@ -67,40 +67,46 @@ export default {
       itemAll: [],
       interestId: [],
       interestName: [],
+      condition: [],
     };
   },
   async created() {
     const request = await this.$axios.$post(
-      '/get_usameint',
+      "/get_usameint",
       {
         id: this.$auth.user.id,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
     this.userList = [...request.ListUser];
     const reqPic = await this.$axios.$post(
-      '/get_profilebyid',
+      "/get_profilebyid",
       {
         post: this.userList,
       },
       {
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
-      },
+      }
     );
+
     this.userItem = [...reqPic.userPic];
     this.memberItem = [...reqPic.memberItem];
     for (const user of this.userList) {
       for (const item of this.userItem) {
         for (const member of this.memberItem) {
-          if (user.id === item.id && user.id === member.id) {
+          if (
+            user.id === item.id &&
+            user.id === member.id &&
+            item.id === member.id
+          ) {
             this.itemAll.push({
               id: user.id,
               profile_image: item.profile_image,
@@ -111,6 +117,8 @@ export default {
           }
         }
       }
+      this.condition = Array(this.itemAll.length).fill(true);
+      console.log(this.condition);
     }
 
     // const reqint = await this.$axios.$post(
@@ -129,20 +137,23 @@ export default {
     // console.log(this.interestId);
   },
   methods: {
-    async addFriend(idt) {
+    async addFriend(idt, index) {
       await this.$axios.$post(
-        '/add_match',
+        "/add_match",
         {
           userid: this.$auth.user.id,
           id: idt,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
           },
-        },
+        }
       );
+      this.condition[index] = false;
+      this.itemAll.splice(index, 1);
+      console.log(this.itemAll);
     },
   },
 };
