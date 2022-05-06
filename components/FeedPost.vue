@@ -79,7 +79,6 @@ export default {
       postAll: [],
       userItem: [],
       memberItem: [],
-      checkedUser: null,
       userImage: null,
     };
   },
@@ -126,7 +125,6 @@ export default {
         }
       }
     }
-    this.checkedUser = this.$auth.user.id;
     this.userImage = this.$auth.user.profile_image;
   },
   methods: {

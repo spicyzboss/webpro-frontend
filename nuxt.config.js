@@ -42,7 +42,7 @@ export default {
 
   axios: {
     // baseURL: 'https://api.pattycommunity.com',
-    baseURL: 'http://localhost:9999',
+    baseURL: 'http://localhost:3000',
   },
 
   auth: {
