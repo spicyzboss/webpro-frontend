@@ -91,5 +91,11 @@ export default {
       showpage: true,
     };
   },
+  async beforeCreate() {
+    const admin = await this.$axios.$get('/get_admin');
+    if (admin.status.code !== 200) {
+      this.$router.push('/');
+    }
+  },
 };
 </script>

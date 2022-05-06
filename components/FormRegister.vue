@@ -277,8 +277,8 @@
           >
         </div>
       </div>
-      <div class="mt-5 w-36">
-        <label for="image">Upload</label>
+      <div class="w-full mt-5">
+        <label for="image">Upload Profile Image</label>
         <input
           ref="image"
           type="file"

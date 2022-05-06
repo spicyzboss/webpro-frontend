@@ -119,8 +119,8 @@
 <script>
 import { io } from 'socket.io-client';
 
-const socket = io('wss://api.pattycommunity.com/');
-// const socket = io('ws://localhost:9999/');
+// const socket = io('wss://api.pattycommunity.com/');
+const socket = io('ws://localhost:9999/');
 
 export default {
   data() {
@@ -154,10 +154,11 @@ export default {
   },
   mounted() {
     socket.on('chat', (data) => {
-      this.chats.push(data);
+      this.chats.push(data.chat);
       this.$nextTick(() => {
         this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
       });
+      this.users.push(data.user);
     });
   },
   methods: {

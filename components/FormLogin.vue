@@ -41,14 +41,6 @@
         "
       >
     </div>
-    <div class="flex flex-row-reverse mt-2">
-      <nuxt-link
-        to="#"
-        class="text-sm text-blue-600 hover:underline focus:outline-none focus:underline"
-      >
-        Forgot password?
-      </nuxt-link>
-    </div>
     <div class="flex flex-col items-center">
       <button
         class="w-2/3 h-12 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none focus:shadow-outline hover:bg-indigo-800 focus:bg-indigo-800"
