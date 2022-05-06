@@ -98,9 +98,7 @@ export default {
               },
             },
           );
-          console.log([...reqint.memberInterest].length);
-          if ([...reqint.memberInterest].length == 0) {
-            console.log('55');
+          if ([...reqint.memberInterest].length === 0) {
             this.$router.push('/interest');
           }
         });

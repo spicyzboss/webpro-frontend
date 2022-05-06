@@ -4,6 +4,32 @@
       <nuxt-link to="/" class="focus:outline-none focus:brightness-125">
         <img class="w-40 h-12 select-none" src="/patty-logo.png" alt="patty-logo">
       </nuxt-link>
+      <div v-if="!isObjectEmpty(user)" class="flex justify-between w-1/5 h-full">
+        <nuxt-link to="/" class="focus:outline-none focus:brightness-125 hover:bg-[#3d3e72]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </nuxt-link>
+        <nuxt-link to="/message" class="focus:outline-none focus:brightness-125 hover:bg-[#3d3e72]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-12 h-12 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+          </svg>
+        </nuxt-link>
+      </div>
       <div v-if="isObjectEmpty(user)" class="hidden gap-8 sm:flex">
         <nuxt-link to="/login" class="text-white hover:underline place-self-center focus:underline focus:outline-none">
           Login
