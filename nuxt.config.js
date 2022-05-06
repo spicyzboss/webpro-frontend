@@ -41,8 +41,8 @@ export default {
   build: {},
 
   axios: {
-    // baseURL: 'https://api.pattycommunity.com',
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://api.pattycommunity.com',
+    //baseURL: 'http://localhost:3000',
   },
 
   auth: {
