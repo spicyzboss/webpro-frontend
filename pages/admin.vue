@@ -28,57 +28,10 @@
           </div>
         </div>
         <div v-if="showpage" class="flex flex-col items-center w-full h-full overflow-y-auto bg-gray-200 border lg:items-start lg:col-span-3">
-          <div class="relative w-auto max-w-lg m-4 bg-white border border-b rounded-lg">
-            <div class="flex w-full p-3">
-              <div class="flex w-full">
-                <div class="flex items-center justify-center overflow-hidden bg-gray-500 rounded-full w-14 h-14">
-                  <img src="/profile.png" alt="profilepic">
-                </div>
-                <div class="flex flex-col w-3/4 ml-2">
-                  <div class="w-[70%]">
-                    <p class="text-lg font-bold">
-                      Nathan Korlin
-                    </p>
-                  </div>
-                  <div class="w-[100%]">
-                    <p class="text-sm text-red-500">
-                      Report : Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi hic dolorum et voluptatem saepe sunt, placeat cumque vitae maiores reprehenderit ullam impedit quas mollitia temporibus, at quos, beatae culpa! Labore?
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="pb-14" />
-            <div class="absolute inset-x-0 bottom-0 w-full h-12">
-              <button class="w-full h-12 text-white bg-red-500 rounded-b-lg hover:bg-red-700">
-                Black List
-              </button>
-            </div>
-          </div>
+          <ReportCard v-for="rp in report" :key="rp.id" :report="rp" @ban="ban(rp.id, rp.content)" />
         </div>
         <div v-else class="flex flex-col items-center w-full h-full overflow-y-auto bg-gray-200 border lg:items-start lg:col-span-3">
-          <div class="relative w-1/4 m-4 bg-white border border-b rounded-lg">
-            <div class="flex w-full p-3">
-              <div class="flex w-full">
-                <div class="flex items-center justify-center overflow-hidden bg-gray-500 rounded-full w-14 h-14">
-                  <img src="/profile.png" alt="profilepic">
-                </div>
-                <div class="flex flex-col w-3/4 ml-2">
-                  <div class="w-[70%]">
-                    <p class="text-lg font-bold">
-                      Nathan Korlin
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="pb-14" />
-            <div class="absolute inset-x-0 bottom-0 w-full h-12">
-              <button class="w-full h-12 text-white bg-red-500 rounded-b-lg hover:bg-red-700">
-                Unblacklist
-              </button>
-            </div>
-          </div>
+          <BlackListCard v-for="list in blacklist" :key="list.id" :member="list" @unban="unban(list.id)" />
         </div>
       </div>
     </div>
@@ -89,6 +42,8 @@ export default {
   data() {
     return {
       showpage: true,
+      blacklist: [],
+      report: [],
     };
   },
   async beforeCreate() {
@@ -96,6 +51,44 @@ export default {
     if (admin.status.code !== 200) {
       this.$router.push('/');
     }
+  },
+  async beforeMount() {
+    this.getBlacklist();
+
+    this.getReport();
+  },
+  methods: {
+    unban(id) {
+      this.$axios.$delete(`/blacklist/${id}`).then((res) => {
+        if (res.status.code === 200) {
+          this.blacklist = this.blacklist.filter((list) => list.id !== id);
+        }
+      });
+    },
+    ban(id, reason) {
+      this.$axios.$post('/ban', {
+        member_id: id,
+        reason,
+      }).then((res) => {
+        if (res.status.code === 200) {
+          this.$nextTick(() => {
+            this.getBlacklist();
+          });
+        }
+      });
+    },
+    async getBlacklist() {
+      const blacklist = await this.$axios.$get('/get_blacklists');
+      if (blacklist.status.code === 200) {
+        this.blacklist = blacklist.blacklists;
+      }
+    },
+    async getReport() {
+      const report = await this.$axios.$get('/reports');
+      if (report.status.code === 200) {
+        this.report = report.reports;
+      }
+    },
   },
 };
 </script>
