@@ -5,7 +5,7 @@
         <div
           class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full "
         >
-          <img :src="userImage" alt="profilepic" />
+          <img :src="userImage" alt="profilepic">
         </div>
       </div>
       <div v-if="!posting" class="w-full ml-2">
@@ -61,7 +61,7 @@
                 :value="interest.name"
                 :checked="condition[index] == true"
                 @click="insertToList(interest.name, index)"
-              />
+              >
               <label
                 class="inline-block text-gray-800 form-check-label"
                 for="flexCheckDefault"
@@ -99,7 +99,7 @@
             name="date"
             placeholder="date"
             class="w-full px-4 py-2 text-left text-gray-600 bg-gray-100  rounded-xl"
-          />
+          >
         </div>
         <div class="flex justify-end w-full gap-4 mt-4">
           <button
@@ -137,17 +137,17 @@ export default {
       selectedList: [],
       condition: [],
       selectedId: [],
-      description: "",
-      date: "",
+      description: '',
+      date: '',
       posting: false,
       userImage: null,
     };
   },
   async created() {
-    const request = await this.$axios.$get("/get_interest", {
+    const request = await this.$axios.$get('/get_interest', {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     });
 
@@ -162,8 +162,8 @@ export default {
     },
     cancelPostDetail() {
       this.posting = false;
-      this.description = "";
-      this.date = "";
+      this.description = '';
+      this.date = '';
     },
     insertToList(bname, index) {
       this.selectedList.push({ name: bname });
@@ -171,20 +171,20 @@ export default {
     },
     async createPost() {
       const reqone = await this.$axios.$post(
-        "/get_idbypost",
+        '/get_idbypost',
         {
           interest: this.selectedList,
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
-        }
+        },
       );
       this.selectedId = [...reqone.interestId];
       await this.$axios.$post(
-        "/post",
+        '/post',
         {
           post_by: this.$auth.user.id,
           content: this.description,
@@ -193,10 +193,10 @@ export default {
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
-        }
+        },
       );
 
       this.posting = false;

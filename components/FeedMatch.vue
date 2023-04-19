@@ -1,5 +1,5 @@
 <template>
-  <di>
+  <div>
     <div
       v-for="(item, index) in itemAll"
       :key="item.id"
@@ -15,7 +15,7 @@
       "
     >
       <div>
-        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2" />
+        <img :src="item.profile_image" alt="profilepic" class="w-full h-1/2">
       </div>
       <div class="p-4">
         <p class="text-2xl">
@@ -52,7 +52,7 @@
         </button>
       </div>
     </div>
-  </di>
+  </div>
 </template>
 <script>
 /* eslint-disable no-restricted-syntax */
@@ -72,29 +72,29 @@ export default {
   },
   async created() {
     const request = await this.$axios.$post(
-      "/get_usameint",
+      '/get_usameint',
       {
         id: this.$auth.user.id,
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
     this.userList = [...request.ListUser];
     const reqPic = await this.$axios.$post(
-      "/get_profilebyid",
+      '/get_profilebyid',
       {
         post: this.userList,
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
 
     this.userItem = [...reqPic.userPic];
@@ -103,9 +103,9 @@ export default {
       for (const item of this.userItem) {
         for (const member of this.memberItem) {
           if (
-            user.id === item.id &&
-            user.id === member.id &&
-            item.id === member.id
+            user.id === item.id
+            && user.id === member.id
+            && item.id === member.id
           ) {
             this.itemAll.push({
               id: user.id,
@@ -123,17 +123,17 @@ export default {
   methods: {
     async addFriend(idt, index) {
       await this.$axios.$post(
-        "/add_match",
+        '/add_match',
         {
           userid: this.$auth.user.id,
           id: idt,
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           },
-        }
+        },
       );
       this.condition[index] = false;
       this.itemAll.splice(index, 1);

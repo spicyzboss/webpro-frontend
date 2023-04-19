@@ -83,8 +83,8 @@
 <script>
 import { io } from 'socket.io-client';
 
-const socket = io('wss://api.pattycommunity.com');
-// const socket = io('ws://localhost:9999');
+// const socket = io('wss://api.pattycommunity.com');
+const socket = io('ws://localhost:9999');
 
 export default {
   data() {
@@ -93,6 +93,7 @@ export default {
       post: null,
       chats: [],
       message: '',
+      toggleReport: false,
     };
   },
   async beforeMount() {

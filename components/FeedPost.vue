@@ -10,10 +10,12 @@
           <div
             class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-500 rounded-full "
           >
-            <img :src="data.profile_image" alt="profilepic" />
+            <img :src="data.profile_image" alt="profilepic">
           </div>
           <div class="flex flex-col ml-2">
-            <p class="font-bold">{{ data.firstname }} {{ data.lastname }}</p>
+            <p class="font-bold">
+              {{ data.firstname }} {{ data.lastname }}
+            </p>
             <p class="text-sm text-gray-400">
               {{ data.created_at }}
             </p>
@@ -83,10 +85,10 @@ export default {
     };
   },
   async created() {
-    const request = await this.$axios.$get("/get_postdata", {
+    const request = await this.$axios.$get('/get_postdata', {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     });
 
@@ -94,16 +96,16 @@ export default {
     this.postData = [...request.postx];
 
     const reqPic = await this.$axios.$post(
-      "/get_profilebyid",
+      '/get_profilebyid',
       {
         post: this.postNormal,
       },
       {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      }
+      },
     );
     this.userItem = [...reqPic.userPic];
     this.memberItem = [...reqPic.memberItem];

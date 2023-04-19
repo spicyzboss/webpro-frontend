@@ -119,8 +119,8 @@
 <script>
 import { io } from 'socket.io-client';
 
-const socket = io('wss://api.pattycommunity.com/');
-// const socket = io('ws://localhost:9999/');
+// const socket = io('wss://api.pattycommunity.com/');
+const socket = io('ws://localhost:9999/');
 
 export default {
   data() {
@@ -148,8 +148,8 @@ export default {
     const { chat, user, status } = await this.$axios.$get('/chat');
     if (status.code === 200) {
       this.chats = chat;
-      this.users = user.filter((v) => v.id !== this.$auth.user.id);
-      this.selectedUser = this.users[0].id;
+      this.users = user.filter((v) => v?.id !== this.$auth.user.id);
+      this.selectedUser = this.users[0]?.id || '';
     }
   },
   mounted() {
