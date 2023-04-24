@@ -5,8 +5,8 @@
       <p class="font-bold">
         {{ user.firstname }} {{ user.lastname }}
       </p>
-      <div class="flex w-full gap-2 text-gray-500 truncate">
-        <p class="truncate" style="max-width: 40%">
+      <div v-if="latestChat" class="flex w-full gap-2 text-gray-500 truncate">
+        <p v-if="latestChat" class="truncate" style="max-width: 40%">
           {{ latestChat.content }}
         </p>
         <p>-</p>
@@ -24,8 +24,8 @@ export default {
   props: ['user', 'selected', 'chat'],
   computed: {
     latestChat() {
-      const chat = this.chat.filter((v) => v.to === this.user.id || v.from === this.user.id);
-      return chat[chat.length - 1];
+      const chat = this.chat.filter((v) => v.to === this.user.id || v.from === this.user.id) || [];
+      return chat.length ? chat[chat.length - 1] : null;
     },
     relativeTime() {
       const msPerMinute = 60 * 1000;
@@ -33,6 +33,8 @@ export default {
       const msPerDay = msPerHour * 24;
       const msPerMonth = msPerDay * 30;
       const msPerYear = msPerDay * 365;
+
+      if (!this.latestChat) return '';
 
       const elapsed = Date.now() - new Date(this.latestChat.created_at).getTime();
 

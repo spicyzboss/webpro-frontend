@@ -72,13 +72,15 @@
               </div>
             </div>
             <div ref="message" class="flex flex-col w-full h-full pb-4 overflow-y-scroll">
-              <template v-for="chat in selectedChat">
-                <SentMessage v-if="chat.from === $auth.user.id" :key="chat.id">
-                  {{ chat.content }}
-                </SentMessage>
-                <ReceiveMessage v-else :key="chat.id">
-                  {{ chat.content }}
-                </ReceiveMessage>
+              <template v-if="selectedChat.length">
+                <template v-for="chat in selectedChat">
+                  <SentMessage v-if="chat.from === $auth.user.id" :key="chat.id">
+                    {{ chat.content }}
+                  </SentMessage>
+                  <ReceiveMessage v-else :key="chat.id">
+                    {{ chat.content }}
+                  </ReceiveMessage>
+                </template>
               </template>
             </div>
             <div class="flex items-center justify-center w-full p-4 bg-white">
@@ -135,13 +137,13 @@ export default {
   },
   computed: {
     selectedChat() {
-      return this.chats.filter((chat) => chat.to === this.selectedUser || chat.from === this.selectedUser);
+      return this.chats.filter((chat) => chat.to === this.selectedUser || chat.from === this.selectedUser) || [];
     },
     filteredUser() {
-      return this.users.filter((user) => `${user.firstname} ${user.lastname}`.toLowerCase().includes(this.search));
+      return this.users.filter((user) => `${user.firstname} ${user.lastname}`.toLowerCase().includes(this.search)) || [];
     },
     selectedUserData() {
-      return this.users.filter((v) => v.id === this.selectedUser)[0];
+      return this.users.filter((v) => v.id === this.selectedUser)[0] || null;
     },
   },
   async created() {
@@ -149,14 +151,16 @@ export default {
     if (status.code === 200) {
       this.chats = chat;
       this.users = user.filter((v) => v?.id !== this.$auth.user.id);
-      this.selectedUser = this.users[0]?.id || '';
+      this.selectedUser = this.users[0]?.id ? this.users[0] : null;
     }
   },
   mounted() {
     socket.on('chat', (data) => {
       this.chats.push(data.chat);
       this.$nextTick(() => {
-        this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+        if (this.message) {
+          this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+        }
       });
       this.users.push(data.user);
     });
@@ -184,7 +188,9 @@ export default {
     selectUser(id) {
       this.selectedUser = id;
       this.$nextTick(() => {
-        this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+        if (this.message) {
+          this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+        }
       });
     },
   },
